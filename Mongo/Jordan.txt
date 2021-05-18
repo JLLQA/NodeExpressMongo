@@ -1,0 +1,132 @@
+use document_practice;
+db.people.insertOne(
+{
+    "firstName": "Jordan",
+    "surname": "Lewis",
+    "age": 25,
+    "height": 187,
+    "hobbies":  [
+        "Sailing",
+	"Video Games"
+    ]   
+}
+);
+
+db.people.insertMany(
+[
+   {
+        "firstName": "Jordan",
+    	"surname": "Lewis",
+    	"age": 25,
+   	"height": 187,
+	"hobbies":  [
+           "Sailing",
+	   "Video Games"
+    	]      
+    },
+    {
+        "firstName": "Kevin",
+	"surname": "Tse", 
+	"age": 25, 
+	"height": 180,
+	"hobbies": [
+	   "Football",
+	   "Gaming"
+	] 
+    },
+    {
+         "firstName": "George",
+    	 "surname": "Ryalls",
+    	 "age": 23,
+    	 "height": "181cm",
+    	 "hobbies": [
+             "Games",
+             "Gym",
+    	 ]
+    },
+    {
+        "firstName": "Jhon",
+    	"surname": "Urrego",
+    	"age": 23,
+    	"height": 183,
+    	"hobbies":  [
+            "Weightlifting",
+            "Video Games",
+       ]   
+    }
+]);
+
+db.people.updateOne(
+    {
+        "firstName": "George",
+	"surname": "Ryalls",
+    },
+    {
+        "$push": {
+            "hobbies": "Roulette",
+        }
+    }
+);
+
+db.people.updateOne(
+    {
+        "firstName": "Jhon",
+    	"surname": "Urrego"
+    },
+    { 
+        $pull: { 
+            hobbies: {
+                $in: ["Video Games"]
+                    }
+            }
+    }
+)
+
+db.people.find(
+    {
+        "age": {
+            "$gte": 30
+            }
+    }
+);
+
+db.people.find(
+    {
+        "age": {"$lte": 25}
+    },
+    {
+        "_id": false,
+        "firstName": true,
+        "surname": true
+    }
+);
+
+db.people.updateMany(
+    {
+        "age": {"$gte": 24}
+    },
+    {
+        "$set": {"glasses": true}
+    }
+);
+
+db.people.deleteMany(
+    {
+        "glasses": {"$ne": true}
+    }
+);
+
+db.people.updateOne(
+    {
+        "firstName": "Kevin"
+    },
+    {
+        "$set": {
+            "pet": {
+                "name": "Rex",
+                "age": 12,
+                "species": "dog"
+            }
+        }
+    }
+);
