@@ -3,6 +3,9 @@
 ## [Node](Node)
 Node lectures
 
+## [Mongo](Mongo)
+Mongo lectures
+
 ## [Express](Express)
 Express lectures
 * [Intro](Express/demo)
@@ -11,6 +14,3 @@ Express lectures
 * [Error Handling](Express/error)
 * [Router](Express/router)
 * [Mongoose](Express/mongeese)
-
-## [Mongo](Mongo)
-Mongo lectures
