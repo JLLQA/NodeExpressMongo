@@ -5,12 +5,12 @@ Node lectures
 
 ## [Express](Express)
 Express lectures
-* [Intro](demo)
-* [Handling Requests](req_hand)
-* [Middleware](middleware)
-* [Error Handling](error)
-* [Router](router)
-* [Mongoose](mongeese)
+* [Intro](Express/demo)
+* [Handling Requests](Express/req_hand)
+* [Middleware](Express/middleware)
+* [Error Handling](Express/error)
+* [Router](Express/router)
+* [Mongoose](Express/mongeese)
 
 ## [Mongo](Mongo)
 Mongo lectures
