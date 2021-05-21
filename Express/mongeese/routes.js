@@ -4,15 +4,17 @@ const router = express.Router();
 const Product = require("./models/product");
 
 // Get all products
-router.get("/products", async(req, res) => {
+// curl localhost:5000/api/products/getAll
+router.get("/products/getAll", async(req, res) => {
     const prod = await Product.find();
     res.send(prod);
 })
 
 // Get one products
-router.get("/products/one", async(req, res) => {
+// curl localhost:5000/api/products/getOne
+router.get("/products/getOne/:id", async(req, res) => {
     try {
-        const prod = await Product.findById("60a677d574c4172c5c94fbe3");
+        const prod = await Product.findById(req.params.id);
         res.send(prod);
     } catch {
         res.status(500).send("Product does not exist");
@@ -20,7 +22,8 @@ router.get("/products/one", async(req, res) => {
 })
 
 // Create products
-router.post("/products", async(req, res) => {
+// curl -X POST -H"Content-Type:application/json" localhost:5000/api/products/create
+router.post("/products/create", async(req, res) => {
     const prod = new Product({
         name: "carrots",
         price: "1.50"
@@ -29,22 +32,28 @@ router.post("/products", async(req, res) => {
     res.send(prod);
 })
 
-// Update product
-router.post("/products/update", async(req, res) => {
-    const FIND = { _id: "60a677d574c4172c5c94fbe3" };
-    const update = { price: "2.20" };
-    const prod = await Product.findOneAndUpdate(FIND, update, {
-        returnOriginal: false
-    })
+// Update product 60a77a93bbd46d3a34cec5e7
+// curl -X POST -H"Content-Type:application/json" localhost:5000/api/products/update
+router.post("/products/update/:id", async(req, res) => {
+    try {
+        const FIND = { _id: req.params.id };
+        const update = { price: "4.50" };
+        const prod = await Product.findOneAndUpdate(FIND, update, {
+            returnOriginal: false
+        })
+        await prod.save();
 
-    await prod.save();
-    res.send(prod);
+        res.send(`has been updated with new price of £${update.price}`);
+    } catch {
+        res.status(500).send("Product does not exist");
+    }
 })
 
 // Delete product
-router.get("/products/delete", async(req, res) => {
+// curl localhost:5000/api/products/delete
+router.get("/products/delete/:id", async(req, res) => {
     try {
-        const prod = await Product.findByIdAndDelete("60a677d574c4172c5c94fbe3");
+        const prod = await Product.findByIdAndDelete(req.params.id);
         res.send(prod);
     } catch {
         res.status(500).send("Product does not exist");
