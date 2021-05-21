@@ -43,7 +43,7 @@ router.post("/products/update/:id", async(req, res) => {
         })
         await prod.save();
 
-        res.send(`has been updated with new price of £${update.price}`);
+        res.send(`${req.params.id} has been updated with new price of £${update.price}`);
     } catch {
         res.status(500).send("Product does not exist");
     }
